@@ -113,13 +113,14 @@ define('VERSION', '2.2.4');
  */
 define('IN_AUTOINDEX', true);
 
-if (@get_magic_quotes_gpc())
+/*if (@get_magic_quotes_gpc())
 //remove any slashes added by the "magic quotes" setting
 {
 	$_GET = array_map('stripslashes', $_GET);
 	$_POST = array_map('stripslashes', $_POST);
 }
 if (function_exists('set_magic_quotes_runtime')) @set_magic_quotes_runtime(0);
+*/
 
 $_GET = array_change_key_case($_GET, CASE_LOWER);
 $_POST = array_change_key_case($_POST, CASE_LOWER);
