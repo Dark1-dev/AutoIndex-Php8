@@ -191,7 +191,7 @@ http://autoindex.sourceforge.net
  *
  * @param string $class The name of the undefined class
  */
-function __autoload($class)
+spl_autoload_register(Function($class)
 {
 	if ($class != 'self')
 	{
@@ -203,7 +203,7 @@ function __autoload($class)
 			. htmlentities($file) . '</em> - cannot load class.'));
 		}
 	}
-}
+});
 
 /**
  * This is used to report a fatal error that we cannot display with the Display

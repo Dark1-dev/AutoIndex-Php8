@@ -99,7 +99,7 @@ class Url
 		{
 			return '';
 		}
-		if ($d{0} == '/' && $new_dir{0} != '/')
+		if ($d[0] == '/' && $new_dir[0] != '/')
 		{
 			$new_dir = '/' . $new_dir;
 		}

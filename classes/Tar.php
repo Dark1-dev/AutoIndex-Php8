@@ -58,11 +58,11 @@ class Tar
 		$unsigned_chksum = 0;
 		for ($i = 0; $i < 512; $i++)
 		{
-			$unsigned_chksum += ord($data{$i});
+			$unsigned_chksum += ord($data[$i]);
 		}
 		for ($i = 148; $i < 156; $i++)
 		{
-			$unsigned_chksum -= ord($data{$i});
+			$unsigned_chksum -= ord($data[$i]);
 		}
 		return $unsigned_chksum + 256;
 	}
