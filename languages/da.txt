@@ -21,7 +21,7 @@ type	Type
 sort by	Sorter efter
 
 search	Søg
-both    Begge
+both	Begge
 search results for	søgeresultater for
 and its subdirectories	og dens undermapper
 
@@ -32,8 +32,8 @@ username	Brugernavn
 password	Kodeord
 select user to remove	Vælg bruger der skal fjernes
 are you sure you want to remove the user	Er du sikker på at du vil fjerne brugeren
-delete this user    Slet denne bruger
-add user    Tilføj bruger
+delete this user	Slet denne bruger
+add user	Tilføj bruger
 
 guest	Gæst
 user	Almindelig bruger
@@ -47,14 +47,14 @@ new filename	Nyt filnavn
 you can also move the file by specifying a path	du kan også flytte filen ved at specificere en sti
 delete  slet
 are you sure you want to delete the file	Er du sikker på at du vil slette filen
-edit description    redigér beskrivelse
+edit description	redigér beskrivelse
 yes, delete Ja, slet den
 
 upload	Upload
 files to this folder	fil(er) til denne mappe
 uploaded files	Uploadede filer
 failed files	Filer der fejlede
-none    Ingen
+none	Ingen
 file already exists	filnavnet eksisterer allerede
 filename is listed as a hidden file	filenavnet er listet som en skjult fil
 

@@ -43,7 +43,7 @@ level	’·«ÕÌ«  «·⁄÷Ê
 rename	€Ì— «·≈”„/«‰ﬁ·
 renaming	€Ì— «·≈”„
 new filename	√÷› „·›
-you can also move the file by specifying a path	you can also move the file by specifying a path  Ì„ﬂ‰ﬂ „‰  Õ—Ìﬂ «·„·› ·„”«— «Œ— √Ê ﬂ «»… Â–« «·„”«—
+you can also move the file by specifying a path	Ì„ﬂ‰ﬂ „‰  Õ—Ìﬂ «·„·› ·„”«— «Œ— √Ê ﬂ «»… Â–« «·„”«—
 delete	Õ–›
 are you sure you want to delete the file	Â· √‰  „ √ﬂœ „‰ Õ–› «·„·›ø
 edit description	 Õ—Ì— «·Ê’›
