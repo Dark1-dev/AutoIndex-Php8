@@ -63,7 +63,14 @@ class Image
 			throw new ExceptionDisplay('Image file not found: <em>'
 			. Url::html_output($file) . '</em>');
 		}
-		switch (FileItem::ext($file))
+		$ext = FileItem::ext($file);
+		$src = match ($ext) {
+   		'gif' => @imagecreatefromgif($file),
+		'jpeg', 'jpg', 'jpe' => @imagecreatefromjpeg($file),
+		'png' => @imagecreatefrompng($file),
+		default => throw new ExceptionDisplay('Unsupported file extension.'),
+		};
+		/*switch (FileItem::ext($file))
 		{
 			case 'gif':
 			{
@@ -86,7 +93,7 @@ class Image
 			{
 				throw new ExceptionDisplay('Unsupported file extension.');
 			}
-		}
+		}*/
 		if ($src === false)
 		{
 			throw new ExceptionDisplay('Unsupported image type.');

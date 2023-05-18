@@ -78,7 +78,40 @@ class TemplateInfo extends Template
 	 */
 	private function callback_info($m)
 	{
-		switch (strtolower($m[1]))
+		global $you, $page, $max_page, $config;
+
+		return match (strtolower($m[1])) {
+			'archive_link' => Url::html_output($_SERVER['PHP_SELF']) . '?archive=true&amp;dir='
+							  . substr($this->dir_list->__get('dir_name'), strlen($config->__get('base_dir'))),
+		
+			'total_size' => $this->dir_list->__get('total_size')->formatted(),
+		
+			'search_box' => Search::search_box(),
+		
+			'login_box' => $you->login_box(),
+		
+			'current_page_number' => !ENTRIES_PER_PAGE ? 1 : $page,
+		
+			'last_page_number' => !ENTRIES_PER_PAGE ? 1 : $max_page,
+		
+			'previous_page_link' => !ENTRIES_PER_PAGE ? '' :
+									($page <= 1 ? '&lt;&lt;' :
+									 '<a class="autoindex_a" href="'
+									 . Url::html_output($_SERVER['PHP_SELF']) . '?page=' . ($page - 1)
+									 . '&amp;dir=' . substr($this->dir_list->__get('dir_name'),
+													 strlen($config->__get('base_dir'))) . '">&lt;&lt;</a>'),
+		
+			'next_page_link' => !ENTRIES_PER_PAGE ? '' :
+								($page >= $max_page ? '&gt;&gt;' :
+								 '<a class="autoindex_a" href="'
+								 . Url::html_output($_SERVER['PHP_SELF']) . '?page=' . ($page + 1)
+								 . '&amp;dir=' . substr($this->dir_list->__get('dir_name'),
+												 strlen($config->__get('base_dir'))) . '">&gt;&gt;</a>'),
+		
+			default => $this->dir_list->__get($m[1])
+		};		
+		
+		/*switch (strtolower($m[1]))
 		{
 			case 'archive_link':
 			{
@@ -153,7 +186,7 @@ class TemplateInfo extends Template
 			{
 				return $this -> dir_list -> __get($m[1]);
 			}
-		}
+		}*/
 	}
 	
 	/**

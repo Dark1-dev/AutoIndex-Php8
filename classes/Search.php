@@ -57,14 +57,14 @@ class Search extends DirectoryListDetailed
 		$out = '<form action="' . Url::html_output($_SERVER['PHP_SELF']) . '" method="get">'
 		. '<p><input type="hidden" name="dir" value="' . $subdir . '" />'
 		. '<input type="text" name="search" value="' . $search
-		. '" /><br /><select name="search_mode">';
+		. '" />&nbsp;&nbsp;<select name="search_mode">';
 		foreach ($modes as $word => $m)
 		{
 			$sel = (($m == $mode) ? ' selected="selected"' : '');
 			$out .= '<option value="' . $m . '"' . $sel . '>'
 			. $words -> __get($word) . '</option>';
 		}
-		$out .= '</select><input type="submit" class="button" value="'
+		$out .= '</select></p><p><input type="submit" class="button" value="'
 		. $words -> __get('search') . '" /></p></form>';
 		return $out;
 	}

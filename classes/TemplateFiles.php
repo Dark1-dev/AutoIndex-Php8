@@ -75,7 +75,37 @@ class TemplateFiles extends TemplateInfo
 	private function callback_file($m)
 	{
 		global $words, $subdir;
-		switch (strtolower($m[1]))
+		return match (strtolower($m[1])) {
+			'tr_class' => (($this->i % 2) ? 'dark_row' : 'light_row'),
+			'filename' => Url::html_output($this->temp_item->__get('filename')),
+			'file_ext' => $this->temp_item->file_ext(),
+			'size' => $this->temp_item->__get('size')->formatted(),
+			'bytes' => $this->temp_item->__get('size')->__get('bytes'),
+			'date', 'time', 'm_time' => $this->temp_item->format_m_time(),
+			'a_time' => $this->temp_item->format_a_time(),
+			'thumbnail' => $this->temp_item->__get('thumb_link'),
+			'num_subfiles' => (($this->temp_item instanceof DirItem && !$this->temp_item->__get('is_parent_dir')) ? $this->temp_item->num_subfiles() : ''),
+			'delete_link' => (($this->is_admin && !$this->temp_item->__get('is_parent_dir')) ?
+				' [<a href="' . Url::html_output($_SERVER['PHP_SELF']) . '?action=delete&amp;dir=' . rawurlencode($subdir)
+				. '&amp;filename=' . rawurlencode($this->temp_item->__get('filename'))
+				. '" class="autoindex_small autoindex_a">' . $words->__get('delete') . '</a>]' : ''),
+			'rename_link' => (($this->is_admin && !$this->temp_item->__get('is_parent_dir')) ?
+				' [<a href="' . Url::html_output($_SERVER['PHP_SELF']) . '?action=rename&amp;dir=' . rawurlencode($subdir)
+				. '&amp;filename=' . rawurlencode($this->temp_item->__get('filename'))
+				. '" class="autoindex_small autoindex_a">' . $words->__get('rename') . '</a>]' : ''),
+			'edit_description_link' => (($this->is_mod && DESCRIPTION_FILE && !$this->temp_item->__get('is_parent_dir')) ?
+				' [<a href="' . Url::html_output($_SERVER['PHP_SELF']) . '?action=edit_description&amp;dir='
+				. rawurlencode($subdir) . '&amp;filename='
+				. rawurlencode($this->temp_item->__get('filename')) . $slash
+				. '" class="autoindex_small autoindex_a">'
+				. $words->__get('edit description') . '</a>]' : ''),
+			'ftp_upload_link' => (!$this->is_mod || !$this->temp_item instanceof FileItem || !isset($_SESSION['ftp'])) ? '' :
+				' [<a href="' . Url::html_output($_SERVER['PHP_SELF']) . '?action=ftp&amp;dir='
+				. rawurlencode($subdir) . '&amp;filename=' . rawurlencode($this->temp_item->__get('filename'))
+				. '" class="autoindex_small autoindex_a">' . $words->__get('upload to ftp') . '</a>]',
+			default => $this->temp_item->__get($m[1]),
+		};
+		/*switch (strtolower($m[1]))
 		{
 			case 'tr_class':
 			{
@@ -154,7 +184,7 @@ class TemplateFiles extends TemplateInfo
 			{
 				return $this -> temp_item -> __get($m[1]);
 			}
-		}
+		}*/
 	}
 	
 	/**
@@ -166,7 +196,15 @@ class TemplateFiles extends TemplateInfo
 	 */
 	private function callback_type($m)
 	{
-		switch (strtolower($m[1]))
+		return match (strtolower($m[1])) {
+			'is_file' => (($this->temp_item instanceof FileItem) ? $m[2] : ''),
+			'is_dir' => (($this->temp_item instanceof DirItem) ? $m[2] : ''),
+			'is_real_dir' => (($this->temp_item instanceof DirItem && !$this->temp_item->__get('is_parent_dir')) ? $m[2] : ''),
+			'is_parent_dir' => (($this->temp_item instanceof DirItem && $this->temp_item->__get('is_parent_dir')) ? $m[2] : ''),
+			default => throw new ExceptionDisplay('Invalid file:if statement in <em>'
+				. Url::html_output(EACH_FILE) . '</em>'),
+		};
+		/*switch (strtolower($m[1]))
 		{
 			case 'is_file': //file
 			{
@@ -191,7 +229,7 @@ class TemplateFiles extends TemplateInfo
 				throw new ExceptionDisplay('Invalid file:if statement in <em>'
 				. Url::html_output(EACH_FILE) . '</em>');
 			}
-		}
+		}*/
 	}
 	
 	/**
